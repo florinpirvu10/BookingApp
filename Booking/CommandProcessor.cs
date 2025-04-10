@@ -1,5 +1,7 @@
 ﻿using Booking.Services;
 
+namespace Booking;
+
 public class CommandProcessor
 {
     private readonly IConsoleService _consoleService;
@@ -19,13 +21,13 @@ public class CommandProcessor
             var input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input)) break;
 
-            if (input.StartsWith("Availability(") && input.EndsWith(")"))
+            if (input.StartsWith("Availability(") && input.EndsWith(')'))
             {
                 _consoleService.AvailabilityScenario(input);
                 continue;
             }
 
-            if (input.StartsWith("RoomTypes(") && input.EndsWith(")"))
+            if (input.StartsWith("RoomTypes(") && input.EndsWith(')'))
             {
                 _consoleService.RoomTypesScenario(input);
                 continue;

@@ -2,7 +2,10 @@
 
 public class Response<T>
 {
-    public Response() { }
+    public Response() 
+    {
+        Data = default!;
+    }
 
     public Response(T data)
     {

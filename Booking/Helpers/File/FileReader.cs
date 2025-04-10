@@ -1,10 +1,10 @@
-﻿namespace Booking.Helpers
+﻿namespace Booking.Helpers;
+
+public class FileReader : IFileReader
 {
-    public class FileReader : IFileReader
+    public string ReadAllText(string path)
     {
-        public string ReadAllText(string path)
-        {
-            return File.ReadAllText(path);
-        }
+        return File.ReadAllText(path);
     }
 }
+

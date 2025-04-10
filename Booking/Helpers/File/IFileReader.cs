@@ -1,7 +1,6 @@
-﻿namespace Booking.Helpers
+﻿namespace Booking.Helpers;
+
+public interface IFileReader
 {
-    public interface IFileReader
-    {
-        public string ReadAllText(string path);
-    }
+    public string ReadAllText(string path);
 }

@@ -1,8 +1,7 @@
-﻿namespace Booking.Services
+﻿namespace Booking.Services;
+
+public interface IConsoleService
 {
-    public interface IConsoleService
-    {
-        void AvailabilityScenario(string input);
-        void RoomTypesScenario(string input);
-    }
+    void AvailabilityScenario(string input);
+    void RoomTypesScenario(string input);
 }

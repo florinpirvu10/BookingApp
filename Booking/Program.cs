@@ -1,10 +1,11 @@
-﻿using Booking.Helpers;
+﻿using Booking;
+using Booking.Helpers;
 using Booking.Repositories;
 using Booking.Services;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Main()
     {
         var fileReader = new FileReader();
         var hotelRepository = new HotelRepository(fileReader);

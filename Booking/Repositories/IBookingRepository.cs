@@ -1,9 +1,8 @@
 ﻿using Booking.Entities;
 
-namespace Booking.Repositories
+namespace Booking.Repositories;
+
+public interface IBookingRepository
 {
-    public interface IBookingRepository
-    {
-        Response<IEnumerable<BookingEntity>> GetBookings();
-    }
+    Response<IEnumerable<BookingEntity>> GetBookings();
 }
