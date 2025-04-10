@@ -40,20 +40,17 @@ public class BookingService : IBookingService
 
         int availableRooms = typeRooms - numberOfBookings;
 
-        if (availableRooms < 0)
+        switch (availableRooms)
         {
-            response.Data = $"Overbooked by: {availableRooms}";
-            response.IsSuccess = true;
-            return response;
-        }
-
-        if (availableRooms > 0)
-        {
-            response.Data = $"Available rooms: {availableRooms}";
-        }
-        else
-        {
-            response.Data = "No rooms available for the specified criteria.";
+            case < 0:
+                response.Data = $"Overbooked by: {availableRooms}";
+                break;
+            case > 0:
+                response.Data = $"Available rooms: {availableRooms}";
+                break;
+            default:
+                response.Data = "No rooms available for the specified criteria.";
+                break;
         }
 
         response.IsSuccess = true;

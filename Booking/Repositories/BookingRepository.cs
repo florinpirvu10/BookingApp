@@ -12,7 +12,7 @@ public class BookingRepository : IBookingRepository
     public BookingRepository(IFileReader fileReader)
     {
         _fileReader = fileReader;
-        _filePath = Path.Combine(AppContext.BaseDirectory, "Data", "bookings.json"); ;
+        _filePath = Path.Combine(AppContext.BaseDirectory, "Data", "bookings.json");
     }
 
     public Response<IEnumerable<BookingEntity>> GetBookings()
