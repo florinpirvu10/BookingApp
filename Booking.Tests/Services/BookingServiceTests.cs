@@ -97,8 +97,8 @@ namespace Booking.Tests.Services
                 Name = "Hotel California",
                 RoomTypes = new List<RoomType>
                 {
-                    new RoomType { Code = "DBL", Size = 2 },
-                    new RoomType { Code = "SGL", Size = 1 }
+                    new RoomType { Code = "DBL", Size = 2, Description = "Double room" },
+                    new RoomType { Code = "SGL", Size = 1, Description = "Single room" }
                 },
                 Rooms = new List<Room>
                 {
@@ -140,8 +140,8 @@ namespace Booking.Tests.Services
                 Name = "Hotel California",
                 RoomTypes = new List<RoomType>
                 {
-                    new RoomType { Code = "DBL", Size = 2 },
-                    new RoomType { Code = "SGL", Size = 1 }
+                    new RoomType { Code = "DBL", Size = 2, Description = "Double room" },
+                    new RoomType { Code = "SGL", Size = 1, Description = "Single room" }
                 },
                 Rooms = new List<Room>
                 {

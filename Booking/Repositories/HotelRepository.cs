@@ -36,7 +36,7 @@ namespace Booking.Repositories
             }
         }
 
-        public Response<IEnumerable<Room>> GetHotelRooms(string id, string roomType)
+        public Response<IEnumerable<Room>> GetHotelRooms(string id, string? roomType)
         {
             var response = new Response<IEnumerable<Room>>();
             var hotel = GetHotelById(id);

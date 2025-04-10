@@ -1,22 +1,21 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Booking.Entities
+namespace Booking.Entities;
+
+public class BookingEntity
 {
-    public class BookingEntity
-    {
-        [JsonPropertyName("hotelId")]
-        public string HotelId { get; set; }
+    [JsonPropertyName("hotelId")]
+    public required string HotelId { get; set; }
 
-        [JsonPropertyName("arrival")]
-        public string Arrival { get; set; }
+    [JsonPropertyName("arrival")]
+    public required string Arrival { get; set; }
 
-        [JsonPropertyName("departure")]
-        public string Departure { get; set; }
+    [JsonPropertyName("departure")]
+    public required string Departure { get; set; }
 
-        [JsonPropertyName("roomType")]
-        public string RoomType { get; set; }
+    [JsonPropertyName("roomType")]
+    public required string RoomType { get; set; }
 
-        [JsonPropertyName("roomRate")]
-        public string RoomRate { get; set; }
-    }
+    [JsonPropertyName("roomRate")]
+    public string RoomRate { get; set; } = String.Empty;
 }

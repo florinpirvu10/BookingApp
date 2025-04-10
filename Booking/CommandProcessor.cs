@@ -16,7 +16,7 @@ public class CommandProcessor
         while (true)
         {
             Console.Write("> ");
-            string input = Console.ReadLine();
+            var input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input)) break;
 
             if (input.StartsWith("Availability(") && input.EndsWith(")"))
