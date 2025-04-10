@@ -1,9 +1,6 @@
 ﻿using Booking.Services;
 using Booking.Entities;
 using Moq;
-using Xunit;
-using System;
-using System.IO;
 
 namespace Booking.Tests.Services
 {
