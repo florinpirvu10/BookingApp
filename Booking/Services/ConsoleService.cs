@@ -10,8 +10,8 @@ public class ConsoleService : IConsoleService
 
     public void AvailabilityScenario(string input)
     {
-        string parameters = input.Substring("Availability(".Length, input.Length - "Availability()".Length);
-        string[] commandParts = parameters.Split(',');
+        var parameters = input.Substring("Availability(".Length, input.Length - "Availability()".Length);
+        var commandParts = parameters.Split(',');
 
         if (commandParts.Length != 3)
         {
@@ -19,9 +19,9 @@ public class ConsoleService : IConsoleService
             return;
         }
 
-        string hotelId = commandParts[0].Trim();
-        string dateRange = commandParts[1].Trim();
-        string roomType = commandParts[2].Trim();
+        var hotelId = commandParts[0].Trim();
+        var dateRange = commandParts[1].Trim();
+        var roomType = commandParts[2].Trim();
 
         DateTime startDate, endDate;
 
@@ -54,8 +54,8 @@ public class ConsoleService : IConsoleService
 
     public void RoomTypesScenario(string input)
     {
-        string parameters = input.Substring("RoomTypes(".Length, input.Length - "RoomTypes()".Length);
-        string[] commandParts = parameters.Split(',');
+        var parameters = input.Substring("RoomTypes(".Length, input.Length - "RoomTypes()".Length);
+        var commandParts = parameters.Split(',');
 
         if (commandParts.Length != 3)
         {
@@ -63,8 +63,8 @@ public class ConsoleService : IConsoleService
             return;
         }
 
-        string hotelId = commandParts[0].Trim();
-        string dateRange = commandParts[1].Trim();
+        var hotelId = commandParts[0].Trim();
+        var dateRange = commandParts[1].Trim();
         if (!int.TryParse(commandParts[2].Trim(), out int numberOfPeople) || numberOfPeople <= 0)
         {
             Console.WriteLine("Invalid number of people. It must be a positive integer.");
@@ -75,7 +75,7 @@ public class ConsoleService : IConsoleService
 
         if (dateRange.Contains('-'))
         {
-            string[] dates = dateRange.Split('-');
+            var dates = dateRange.Split('-');
             if (dates.Length != 2 ||
                 !DateTime.TryParseExact(dates[0], "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out startDate) ||
                 !DateTime.TryParseExact(dates[1], "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out endDate))

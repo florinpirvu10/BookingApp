@@ -2,6 +2,7 @@
 using Moq;
 
 namespace Booking.Tests;
+
 public class CommandProcessorTests
 {
     private readonly Mock<IConsoleService> _consoleServiceMock;

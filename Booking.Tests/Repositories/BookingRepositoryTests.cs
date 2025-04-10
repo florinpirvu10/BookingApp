@@ -3,6 +3,7 @@ using Booking.Repositories;
 using Moq;
 
 namespace Booking.Tests.Repositories;
+
 public class BookingRepositoryTests
 {
     private readonly Mock<IFileReader> _fileReaderMock;

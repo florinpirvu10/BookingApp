@@ -12,7 +12,7 @@ public class HotelRepository : IHotelRepository
     public HotelRepository(IFileReader fileReader)
     {
         _fileReader = fileReader;
-        _filePath = Path.Combine(AppContext.BaseDirectory, "Data", "hotels.json"); ;
+        _filePath = Path.Combine(AppContext.BaseDirectory, "Data", "hotels.json");
     }
 
     public Response<IEnumerable<HotelEntity>> GetHotels()
