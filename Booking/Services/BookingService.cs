@@ -78,27 +78,9 @@ public class BookingService : IBookingService
             return response;
         }
 
-        var conflictingRoomTypes = bookings.Data
-            .Where(b => b.HotelId == hotelId)
-            .Where(b =>
-                DateTime.TryParseExact(b.Arrival, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out DateTime arrival) &&
-                DateTime.TryParseExact(b.Departure, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out DateTime departure) &&
-                !(departure <= start || arrival >= end))
-            .Select(b => b.RoomType);
-
-        var availableRoomTypes = hotel.Data.Rooms
-            .GroupBy(room => room.RoomType)
-            .Select(group => new
-            {
-                RoomType = group.Key,
-                Count = group.Count() - conflictingRoomTypes.Where(x => x == group.Key).Count(),
-                Capacity = hotel.Data.RoomTypes.First(rt => rt.Code == group.Key).Size
-            })
-            .OrderByDescending(rt => rt.Capacity)
-            .ToList();
-
         var allocatedRooms = new List<string>();
         int remainingPeople = numberOfPeople;
+        var availableRoomTypes = GetAvailableRoomTypes(bookings.Data, hotel.Data, start, end);
 
         foreach (var roomType in availableRoomTypes)
         {
@@ -132,6 +114,30 @@ public class BookingService : IBookingService
         response.Data = $"{hotel.Data.Name}: {string.Join(", ", allocatedRooms)}";
         response.IsSuccess = true;
         return response;
+    }
+
+    protected static IEnumerable<AvailableRoomType> GetAvailableRoomTypes(IEnumerable<BookingEntity> bookings, HotelEntity hotel, DateTime start, DateTime end)
+    {
+        var conflictingRoomTypes = bookings
+            .Where(b => b.HotelId == hotel.Id)
+            .Where(b =>
+                DateTime.TryParseExact(b.Arrival, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out DateTime arrival) &&
+                DateTime.TryParseExact(b.Departure, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out DateTime departure) &&
+                !(departure <= start || arrival >= end))
+            .Select(b => b.RoomType);
+
+        var availableRoomTypes = hotel.Rooms
+            .GroupBy(room => room.RoomType)
+            .Select(group => new AvailableRoomType
+            {
+                RoomType = group.Key,
+                Count = group.Count() - conflictingRoomTypes.Where(x => x == group.Key).Count(),
+                Capacity = hotel.RoomTypes.First(rt => rt.Code == group.Key).Size
+            })
+            .OrderByDescending(rt => rt.Capacity)
+            .ToList();
+
+        return availableRoomTypes;
     }
 
     protected static int CountBookings(IEnumerable<BookingEntity> bookings, string hotelId, string roomType, DateTime start, DateTime end)
