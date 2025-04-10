@@ -95,19 +95,22 @@ public class BookingServiceTests
             Id = "H1",
             Name = "Hotel California",
             RoomTypes = new List<RoomType>
-            {
-                new RoomType { Code = "DBL", Size = 2, Description = "Double room" },
-                new RoomType { Code = "SGL", Size = 1, Description = "Single room" }
-            },
+        {
+            new RoomType { Code = "DBL", Size = 2, Description = "Double room" },
+            new RoomType { Code = "SGL", Size = 1, Description = "Single room" }
+        },
             Rooms = new List<Room>
-            {
-                new Room { RoomType = "DBL", RoomId = "201" },
-                new Room { RoomType = "DBL", RoomId = "202" },
-                new Room { RoomType = "SGL", RoomId = "101" }
-            }
+        {
+            new Room { RoomType = "DBL", RoomId = "201" },
+            new Room { RoomType = "DBL", RoomId = "202" },
+            new Room { RoomType = "SGL", RoomId = "101" }
+        }
         };
 
-        var bookings = new List<BookingEntity>();
+        var bookings = new List<BookingEntity>
+        {
+            new BookingEntity { HotelId = "H1", RoomType = "DBL", Arrival = "20240901", Departure = "20240902" }
+        };
 
         _hotelRepositoryMock.Setup(repo => repo.GetHotelById("H1")).Returns(new Response<HotelEntity?>
         {

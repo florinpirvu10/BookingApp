@@ -28,20 +28,6 @@
           "Non-smoking",
           "Sea View"
         ]
-      },
-      {
-        "code": "TRL",
-        "size": 3,
-        "description": "Triple Room",
-        "amenities": [
-          "WiFi",
-          "TV",
-          "Minibar"
-        ],
-        "features": [
-          "Non-smoking",
-          "Sea View"
-        ]
       }
     ],
     "rooms": [
@@ -60,14 +46,6 @@
       {
         "roomType": "DBL",
         "roomId": "202"
-      },
-      {
-        "roomType": "DBL",
-        "roomId": "203"
-      },
-      {
-        "roomType": "TRL",
-        "roomId": "301"
       }
     ]
   }

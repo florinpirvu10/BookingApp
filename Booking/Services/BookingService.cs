@@ -75,34 +75,11 @@ public class BookingService : IBookingService
             return response;
         }
 
-        var allocatedRooms = new List<string>();
-        int remainingPeople = numberOfPeople;
         var availableRoomTypes = GetAvailableRoomTypes(bookings.Data, hotel.Data, start, end);
+        var allocatedRooms = AllocateRooms(availableRoomTypes, numberOfPeople);
 
-        foreach (var roomType in availableRoomTypes)
-        {
-            int rooms = roomType.Count;
-            while (remainingPeople > 0 && rooms > 0)
-            {
-                if (remainingPeople >= roomType.Capacity)
-                {
-                    allocatedRooms.Add(roomType.RoomType);
-                    remainingPeople -= roomType.Capacity;
-                    rooms--;
-                }
-                else if (availableRoomTypes.Any(x => x.Capacity == remainingPeople))
-                {
-                    break;
-                }
-                else
-                {
-                    allocatedRooms.Add(roomType.RoomType + "!");
-                    remainingPeople = 0;
-                }
-            }
-        }
 
-        if (remainingPeople > 0)
+        if (allocatedRooms == null)
         {
             response.ErrorMessage = "Allocation not possible with the available rooms.";
             return response;
@@ -131,10 +108,45 @@ public class BookingService : IBookingService
                 Count = group.Count() - conflictingRoomTypes.Where(x => x == group.Key).Count(),
                 Capacity = hotel.RoomTypes.First(rt => rt.Code == group.Key).Size
             })
+            .Where(x => x.Count > 0)
             .OrderByDescending(rt => rt.Capacity)
             .ToList();
 
         return availableRoomTypes;
+    }
+
+    protected static IEnumerable<string>? AllocateRooms(IEnumerable<AvailableRoomType> rooms, int numberOfPeople)
+    {
+        var allocatedRooms = new List<string>();
+        int remainingPeople = numberOfPeople;
+
+        foreach (var room in rooms.OrderByDescending(r => r.Capacity))
+        {
+            while (remainingPeople > 0 && room.Count > 0)
+            {
+                if (remainingPeople >= room.Capacity)
+                {
+                    allocatedRooms.Add(room.RoomType);
+                    remainingPeople -= room.Capacity;
+                }
+                else
+                {
+                    allocatedRooms.Add(room.RoomType + "!");
+                    remainingPeople = 0;
+                }
+                room.Count--;
+            }
+
+            if (remainingPeople == 0)
+                break;
+        }
+
+        if (remainingPeople > 0)
+        {
+            return null;
+        }
+
+        return allocatedRooms;
     }
 
     protected static int CountBookings(IEnumerable<BookingEntity> bookings, string hotelId, string roomType, DateTime start, DateTime end)
