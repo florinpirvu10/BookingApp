@@ -3,6 +3,8 @@ using Booking.Helpers;
 using Booking.Repositories;
 using Booking.Services;
 
+namespace Booking;
+
 internal class Program
 {
     private static void Main()
