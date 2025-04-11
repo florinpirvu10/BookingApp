@@ -29,32 +29,26 @@ public class CommandProcessorTests
 
         // Assert
         Assert.Contains("Enter commands to check room availability or press Enter to exit.", consoleOutput.ToString());
+
     }
 
     [Fact]
     public void Run_ShouldCallAvailabilityScenario_WhenInputIsAvailabilityCommand()
     {
+
         // Arrange
         using var consoleInput = new StringReader("Availability(H1, 20240901, DBL)\n\n");
         Console.SetIn(consoleInput);
 
-        var originalOutput = Console.Out;
-        var consoleOutput = new StringWriter();
+
+        using var consoleOutput = new StringWriter();
         Console.SetOut(consoleOutput);
 
-        try
-        {
-            // Act
-            _commandProcessor.Run();
+        // Act
+        _commandProcessor.Run();
 
-            // Assert
-            _consoleServiceMock.Verify(service => service.AvailabilityScenario("Availability(H1, 20240901, DBL)"), Times.Once);
-        }
-        finally
-        {
-            // Reset the console output to its original value
-            Console.SetOut(originalOutput);
-        }
+        // Assert
+        _consoleServiceMock.Verify(service => service.AvailabilityScenario("Availability(H1, 20240901, DBL)"), Times.Once);
     }
 
     [Fact]
