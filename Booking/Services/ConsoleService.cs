@@ -27,7 +27,7 @@ public class ConsoleService : IConsoleService
 
         if (dateRange.Contains('-') && dateRange.Split('-').Length == 2)
         {
-            string[] dates = dateRange.Split('-');
+            var dates = dateRange.Split('-');
             if (dates.Length != 2 ||
                 !DateTime.TryParseExact(dates[0], "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out startDate) ||
                 !DateTime.TryParseExact(dates[1], "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out endDate))
